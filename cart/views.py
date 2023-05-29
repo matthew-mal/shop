@@ -11,9 +11,9 @@ def cart_detail(request):
 
 
 @require_POST
-def cart_add(request, product_id):
+def cart_add(request, pr_id):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, id=pr_id)
     form = CartAddProductForms(request.POST)
     if form.is_valid():
         cd = form.cleaned_data
@@ -21,8 +21,8 @@ def cart_add(request, product_id):
     return redirect('cart_detail')
 
 
-def cart_remove(request, product_id):
+def cart_remove(request, pr_id):
     cart = Cart(request)
-    product = get_object_or_404(Product, id=product_id)
+    product = get_object_or_404(Product, id=pr_id)
     cart.remove(product)
     return redirect('cart_detail')

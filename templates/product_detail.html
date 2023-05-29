@@ -8,7 +8,7 @@
         {% if products.image %}
         {{ products.image.url }}
         {% else %}
-        {% static 'img/no_image.png' %}
+        {% static 'img/no_image.jpg' %}
         {% endif %}"
              class="image_detail" alt="1">
     </div>
@@ -43,7 +43,7 @@
 
         <br><br>
         <h2>{{ products.price }} ₽</h2>
-        <form action="{% url 'add_item' products.id %}" method="POST">
+        <form action="{% url 'cart_add' products.id %}" method="POST">
             {% csrf_token %}
             {{ cart_product_form }}
             <button type="submit" class="add_to_cart">Add<br><i class="fa-solid fa-cart-plus"></i></button>

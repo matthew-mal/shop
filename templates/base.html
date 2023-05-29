@@ -16,11 +16,11 @@
     <nav class="container">
 
         <ul id="menu" class="complex_list">
-            <a href="{% url 'list_of_products' %}">
+            <a href="{% url 'product_list' %}">
                 <li><i class="fa-solid fa-house"></i> Shop with django</li>
             </a>
             <li>
-                <form action="{% url 'list_of_products' %}" method="GET">
+                <form action="{% url 'product_list' %}" method="GET">
                     <input name="q" placeholder="Search..." type="search">
                     <button class="button_search" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </form>

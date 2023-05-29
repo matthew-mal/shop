@@ -16,7 +16,7 @@ def product_list(request, category_slug=None):
     search_query = request.GET.get('q')
     if search_query:
         # Если есть поисковый запрос, фильтруем продукты по запросу
-        products = product.filter(title__icontains=search_query)
+        product = product.filter(name__icontains=search_query)
 
     if category_slug:
         category = get_object_or_404(Category, slug=category_slug)
@@ -44,4 +44,6 @@ def product_list(request, category_slug=None):
 def product_detail(request, pr_id, product_slug):
     products = get_object_or_404(Product, id=pr_id, slug=product_slug)
     cart_product_form = CartAddProductForms()
-    return render(request, 'product_detail.html', {'products': products, 'cart_product_form': cart_product_form})
+    category = products.category
+    return render(request, 'product_detail.html',
+                  {'products': products, 'cart_product_form': cart_product_form, 'category': category})

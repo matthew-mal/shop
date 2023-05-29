@@ -37,7 +37,7 @@
                         {{ item.product.name }}
                     </div>
                     <div class="order_price">
-                        ₴{{ item.product.price }}
+                        {{ item.product.price }} ₽
                     </div>
                 </div>
 
@@ -45,7 +45,7 @@
             {% endfor %}
         </ul>
         <div class="total_price">
-            <h3>Total:{{ cart.get_total_price }} руб.</h3>
+            <h3>Total:{{ cart.total_price }} ₽</h3>
         </div>
     </div>
 </div>

@@ -5,17 +5,17 @@
 <nav class="container1">
     <ul id="menu2" class="complex_list2">
         {% if category is None %}
-        <li><a href="{% url 'list_of_products' %}">All</a></li>
+        <li><a href="{% url 'product_list' %}">All</a></li>
         {% for x in categories %}
-        <li><a href="{{ x.get_absolute_url }}">{{ x.title }}</a></li>
+        <li><a href="{{ x.get_absolute_url }}">{{ x.name }}</a></li>
         {% endfor %}
         {% else %}
-        <li><a href="{% url 'list_of_products' %}">All</a></li>
+        <li><a href="{% url 'product_list' %}">All</a></li>
         {% for x in categories %}
-        {% with title=x.title|stringformat:"s" %}
+        {% with title=x.name|stringformat:"s" %}
         {% with categ=category|stringformat:"s" %}
         <li class="{% if title == categ %}active{% endif %}">
-            <a href="{{ x.get_absolute_url }}">{{ x.title }}</a>
+            <a href="{{ x.get_absolute_url }}">{{ x.name }}</a>
         </li>
         {% endwith %}
         {% endwith %}
@@ -32,13 +32,13 @@
         <h1> Products </h1>
         {% endif %}
         <div class="category_wrapper">
-            {% for x in products %}
+            {% for x in product %}
             <div>
                 <a href="{{ x.get_absolute_url }}">
-                    <img src="{% if x.image %}{{ x.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+                    <img src="{% if x.image %}{{ x.image.url }}{% else %}{% static 'img/no_image.jpg' %}{% endif %}"
                          class="image_list">
                 </a>
-                <h2><a href="{{ x.get_absolute_url }}">{{ x.title }}</a></h2>
+                <h2><a href="{{ x.get_absolute_url }}">{{ x.name }}</a></h2>
                 <p><a href="{{ x.get_absolute_url }}">{{ x.price }} ₽</a></p>
             </div>
             {% endfor %}
