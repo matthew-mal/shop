@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="form">
+    <div>
+        <h1 style="font-size: 40px">Checkout</h1>
+        <form method="POST">
+            {% for form in orders %}
+            <div class="order_wrapper">
+                <div class="label">
+                    {{ form.label }}:
+                </div>
+                <div class="frame">
+                    {{ form }}
+                </div>
+            </div>
+            {% endfor %}
+            <button type="submit" class="button_order">Place order</button>
+            {% csrf_token %}
+        </form>
+    </div>
+
+
+    <div class="check">
+        <div class="title_order">
+            <h3> Your order </h3>
+        </div>
+        <ul>
+            {% for item in cart %}
+            <li>
+                <div class="stek">
+                    <div class="order_quantity">
+                        {{ item.quantity }}x
+                    </div>
+                    <div>
+                        {{ item.product.name }}
+                    </div>
+                    <div class="order_price">
+                        ₴{{ item.product.price }}
+                    </div>
+                </div>
+
+            </li>
+            {% endfor %}
+        </ul>
+        <div class="total_price">
+            <h3>Total:{{ cart.get_total_price }} руб.</h3>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

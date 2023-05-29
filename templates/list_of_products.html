@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<nav class="container1">
+    <ul id="menu2" class="complex_list2">
+        {% if category is None %}
+        <li><a href="{% url 'list_of_products' %}">All</a></li>
+        {% for x in categories %}
+        <li><a href="{{ x.get_absolute_url }}">{{ x.title }}</a></li>
+        {% endfor %}
+        {% else %}
+        <li><a href="{% url 'list_of_products' %}">All</a></li>
+        {% for x in categories %}
+        {% with title=x.title|stringformat:"s" %}
+        {% with categ=category|stringformat:"s" %}
+        <li class="{% if title == categ %}active{% endif %}">
+            <a href="{{ x.get_absolute_url }}">{{ x.title }}</a>
+        </li>
+        {% endwith %}
+        {% endwith %}
+        {% endfor %}
+        {% endif %}
+    </ul>
+</nav>
+
+<div class="shop">
+    <div class="products">
+        {% if category %}
+        <h1 class="cat"> {{ category }} </h1>
+        {% else %}
+        <h1> Products </h1>
+        {% endif %}
+        <div class="category_wrapper">
+            {% for x in products %}
+            <div>
+                <a href="{{ x.get_absolute_url }}">
+                    <img src="{% if x.image %}{{ x.image.url }}{% else %}{% static 'img/no_image.png' %}{% endif %}"
+                         class="image_list">
+                </a>
+                <h2><a href="{{ x.get_absolute_url }}">{{ x.title }}</a></h2>
+                <p><a href="{{ x.get_absolute_url }}">{{ x.price }} ₽</a></p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div class="pagination">
+    {% if page.has_previous %}
+    <a href="?page={{ page.previous_page_number }}">Previous</a>
+    {% endif %}
+
+    <span class="current-page">{{ page.number }}</span>
+
+    {% if page.has_next %}
+    <a href="?page={{ page.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+<script type="text/javascript" src="{% static 'js/script.js' %}"></script>
+
+{% endblock %}
