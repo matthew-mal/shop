@@ -1,0 +1,44 @@
+{#{% extends 'base.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#<table>#}
+{#    <thead>#}
+{#        <tr>#}
+{#            <th>Image</th>#}
+{#            <th>Product</th>#}
+{#            <th>Quantity</th>#}
+{#            <th>Remove</th>#}
+{#            <th>Unit price</th>#}
+{#            <th>Price</th>#}
+{#        </tr>#}
+{#    </thead>#}
+{#    <tbody>#}
+{#        {% for item in cart %}#}
+{#            {% with product=item.product %}#}
+{#                <tr class="cart_products">#}
+{#                    <td><img src="{% if product.image %}{{ product.image.url }}{% else %}{% static 'img/no_image.jpg' %}{% endif %}" class="image_cart"></td>#}
+{#                    <td>{{ product.name }}</td>#}
+{#                    <td>{{ item.quantity }}</td>#}
+{#                    <td><a href="{% url 'cart_remove' item.product.id %}">Remove</a></td>#}
+{#                    <td>{{ product.price }} ₽</td>#}
+{#                    <td>{{ item.total_price }} ₽</td>#}
+{#                </tr>#}
+{#            {% endwith %}#}
+{#        {% endfor %}#}
+{#        <tr id="tr">#}
+{#            <td>Total</td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td></td>#}
+{#            <td>{{ cart.total_price }} ₽</td>#}
+{#        </tr>#}
+{#    </tbody>#}
+{#</table>#}
+{##}
+{#<div class="button_cart">#}
+{#    <a href="{% url 'product_list' %}" class="button_continue">Continue shopping</a>#}
+{#    <a href="{% url 'order' %}" class="button_checkout">Checkout</a>#}
+{#</div>#}
+{##}
+{#{% endblock %}#}
